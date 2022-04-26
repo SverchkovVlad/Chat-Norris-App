@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'chatApp';
+
+  conversation: any;
+
+  onConversationSelected(conversation : any) {
+    this.conversation = conversation;
+  }
 }
