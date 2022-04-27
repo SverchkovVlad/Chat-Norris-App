@@ -1,39 +1,51 @@
-.chat-container {
+.main-wrapper {
 
-    min-height: 100vh;
+    height: 100vh;
     display: grid;
-    grid-template-columns: 36% 64%;
+    grid-template-rows: 97vh 3vh;
 
-    app-sidebar {
+    .chat-container {
+
         
         display: grid;
-        grid-template-rows: repeat(5, 20%);
-        //border: 1px solid red;
-    }
-
-    app-chat {
-        background-color: #fafafa;
-    }
-
-    .chat-placeholder {
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        h3 {
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 15px;
-            border: 1px solid #888888;
-            background-color: #888888;
-            border-radius: 15px;
-            padding: 4px 15px;
-            text-align: center;
+        grid-template-columns: 36% 64%;
+    
+        app-sidebar {
+            
+            display: grid;
+            grid-template-rows: repeat(5, 20%);
+            //border: 1px solid red;
         }
+    
+        app-chat {
+            background-color: #fafafa;
+        }
+    
+    
+        .chat-placeholder {
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            h3 {
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                border: 1px solid #888888;
+                background-color: #888888;
+                border-radius: 15px;
+                padding: 4px 15px;
+                text-align: center;
+            }
+        }
+       
     }
-
-   
-
-   
+    
+    footer {
+        border-top: 2px solid #cccccc;
+        background-color: #f5f5f5;
+        width: 100%;
+        z-index: 1;
+    }
 }

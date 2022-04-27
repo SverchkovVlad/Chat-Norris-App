@@ -1,14 +1,19 @@
-<div class="chat-container">
+<div class="main-wrapper">
+  
+  <div class="chat-container">
 
-  <app-sidebar (conversationClicked) = "onConversationSelected($event)"></app-sidebar>
-
-  <div class="chat-placeholder" *ngIf = "!conversation">
-    <h3>Select a chat to start messaging</h3>
+    <app-sidebar (conversationClicked) = "onConversationSelected($event)"></app-sidebar>
+  
+    <div class="chat-placeholder" *ngIf = "!conversation">
+      <h3>Select a chat to start messaging</h3>
+    </div>
+  
+    <app-chat></app-chat>
+  
   </div>
-
-  <app-chat></app-chat>
+  
+  <footer></footer>
 
 </div>
-
 
 <router-outlet></router-outlet>
