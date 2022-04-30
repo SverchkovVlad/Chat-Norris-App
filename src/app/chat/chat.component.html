@@ -1,7 +1,32 @@
 <div class="chat-container">
     <div class="header"></div>
-    <div class="body"></div>
-    <div class="footer"></div>
+    <div class="body">
+
+        <div class="body-container">
+
+            <div *ngFor = "let message of conversation.messages" [ngClass]="message.me ? 'my-message' : 'message-box' ">
+
+                <div class="avatar" *ngIf = "!message.me" >
+                    <img [src] ="conversation.avatar" alt="">
+                </div>
+    
+                <div class="message">
+                    {{message.body}}
+                </div>
+    
+                <div class="date-time">
+                    12/12/12, 4:35 AM
+                </div>
+                
+            </div>
+
+        </div>
+        
+    </div>
+    <div class="footer">
+        <textarea placeholder="Type your message"></textarea>
+        <img src="../../assets/icon/send-message.png" alt="">
+    </div>
 </div>
 
 

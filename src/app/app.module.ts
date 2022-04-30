@@ -12,6 +12,7 @@ import { ChatComponent } from './chat/chat.component';
     SidebarComponent,
     ChatComponent
   ],
+  //schemas: [NO_ERRORS_SCHEMA],
   imports: [
     BrowserModule,
     AppRoutingModule

@@ -12,5 +12,12 @@ export class AppComponent {
 
   onConversationSelected(conversation : any) {
     this.conversation = conversation;
+
+    let displayChatDiv : HTMLElement | null = document.querySelector('app-chat');
+
+    if (displayChatDiv) {
+      displayChatDiv.style.display = "grid";
+    }
+    
   }
 }
