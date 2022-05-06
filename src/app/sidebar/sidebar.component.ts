@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit {
     {nickname: 'Josefina', date: 'Feb 18, 2017', latestMessage: 'We are loosing money! Quick!', latestMessageRead: false, 
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
-      {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
+      {id: 1, body: 'O!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true}
         ]},
 

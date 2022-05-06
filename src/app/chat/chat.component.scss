@@ -25,6 +25,7 @@
         height: 545px;
         overflow-y: auto;
         scrollbar-width: none;
+        //scroll-snap-type: y proximity;
         //display: grid;
         
         .body-container {
@@ -61,6 +62,7 @@
                     //border: 1px solid orange;
                     grid-column: 2 / 3;
                     padding-left: 10px;
+                    color: #7a7a7a;
                 }
     
                 .message {
@@ -69,6 +71,7 @@
                     padding: 20px 15px;
                     border-radius: 25px;
                     font-size: 20px;
+                    text-align: center;
                 }    
     
             }
@@ -86,18 +89,22 @@
                 //border: 1px solid red;
 
                 .message {
+                    //display: inline-grid;
+                    //grid-column: min-content;
                     background-color: #e0e0e0;
                     color: #3e3e3e;
                     padding: 20px 15px;
                     border-radius: 25px;
                     font-size: 20px;
-
+                    text-align: center;
                     //grid-column: 1fr;
                     //grid-row: 1fr 1fr;
                 }
 
                 .date-time {
+                    //grid-column: min;
                     text-align: right;
+                    color: #7a7a7a;
                 }
                 
             }

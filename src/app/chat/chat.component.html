@@ -2,7 +2,7 @@
     <div class="header"></div>
     <div class="body">
 
-        <div class="body-container">
+        <div class="body-container" #chatWindow>
 
             <div *ngFor = "let message of conversation.messages" [ngClass]="message.me ? 'my-message' : 'message-box' ">
 
@@ -25,7 +25,7 @@
     </div>
     <div class="footer">
         <textarea placeholder="Type your message"></textarea>
-        <img src="../../assets/icon/send-message.png" alt="">
+        <img src="../../assets/icon/send-message.png" alt="" (click) = "sendMessage()">
     </div>
 </div>
 
