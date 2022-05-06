@@ -3,6 +3,19 @@
     src: url(../../assets/fonts/MrEavesXLMod/MrEavesXLModOT-Reg.ttf);
 }
 
+.avatar {
+
+    //border: 1px solid red;
+
+    img {
+        width: 54px;
+        height: 54px;
+        border: 1px solid #f5f5f5;
+        border-radius: 50px;
+        background-color: #ebecf0;
+    }
+}
+
 .chat-container {
 
     height: 100%;
@@ -17,6 +30,51 @@
         //border: 1px solid red;
         background-color: #f5f5f5;
         border-bottom: 1px solid #cfcfcf;
+        display: grid;
+        justify-content: left;
+        align-items: left;
+        float: left;
+        //grid-template-columns: 20% 80%;
+
+        .header-container {
+            width: 100%;
+            //border: 1px solid orange;
+            display: grid;
+            grid-template-columns: 56px auto;
+            
+            .avatar {
+
+                //border: 1px solid green;
+                position: relative;
+                width: 56px;
+                height: 56px;
+                align-self: center;
+                margin-left: 15px;
+                
+
+                img.message-status {
+                    width: 17px;
+                    height: 17px;
+                    background-color: transparent;
+                   // margin-left: 71px;
+                   // margin-top: 68px;
+                    border: none;
+                    position: absolute;
+                    bottom: -2px;
+                    right: -3px;
+                }
+            }
+
+            .nickname {
+                //display: inline-block;
+                font-size: 30px;
+                //border: 1px solid red;
+                align-self: center;
+                margin-left: 38px;
+            }
+
+           
+        }
     }
 
     .body {
@@ -27,10 +85,11 @@
         scrollbar-width: none;
         //scroll-snap-type: y proximity;
         //display: grid;
-        
+
         .body-container {
 
             display: grid;
+
             //border: 1px solid blue;
             //grid-template-columns: 1fr 1fr;
             .message-box {
@@ -44,27 +103,27 @@
                 //border: 1px solid violet;
                 padding: 20px 15px;
                 justify-self: left;
-                   
-                .avatar {
-    
-                    //border: 1px solid red;
-    
-                    img {
-                        width: 54px;
-                        height: 54px;
-                        border: 1px solid #f5f5f5;
-                        border-radius: 50px;
-                        background-color: #ebecf0;
-                    }
-                }
-    
+
+                // .avatar {
+
+                //     //border: 1px solid red;
+
+                //     img {
+                //         width: 54px;
+                //         height: 54px;
+                //         border: 1px solid #f5f5f5;
+                //         border-radius: 50px;
+                //         background-color: #ebecf0;
+                //     }
+                // }
+
                 .date-time {
                     //border: 1px solid orange;
                     grid-column: 2 / 3;
                     padding-left: 10px;
                     color: #7a7a7a;
                 }
-    
+
                 .message {
                     background-color: #3c4252;
                     color: white;
@@ -72,12 +131,12 @@
                     border-radius: 25px;
                     font-size: 20px;
                     text-align: center;
-                }    
-    
+                }
+
             }
 
             .my-message {
-                    
+
                 display: grid;
                 justify-self: right;
                 grid-template-columns: 1fr;
@@ -106,10 +165,10 @@
                     text-align: right;
                     color: #7a7a7a;
                 }
-                
+
             }
 
-        } 
+        }
 
     }
 

@@ -1,5 +1,17 @@
 <div class="chat-container">
-    <div class="header"></div>
+    <div class="header">
+        <div class="header-container">
+            <div class="avatar">
+                <img [src] ="conversation.avatar">
+                <img *ngIf = "conversation.latestMessageRead" class = "message-status" src="../../assets/icon/check-mark-removebg-preview.png">
+                <img *ngIf = "!conversation.latestMessageRead" class = "message-status" src="/assets/icon/unread-messages.png">
+            </div>
+
+            <div class="nickname">
+                {{conversation.nickname}}
+            </div>
+        </div>
+    </div>
     <div class="body">
 
         <div class="body-container" #chatWindow>

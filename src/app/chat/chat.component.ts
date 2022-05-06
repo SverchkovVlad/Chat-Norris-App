@@ -1,6 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-//import { EventEmitter } from 'stream';
-import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -17,7 +15,6 @@ export class ChatComponent implements OnInit, OnChanges {
 
     let textArea = document.querySelector('textarea')!;
     let textToSend = textArea?.value;
-
 
     if (textToSend) {
       this.conversation.messages.push(
@@ -44,6 +41,8 @@ export class ChatComponent implements OnInit, OnChanges {
       let divBodyContainer = document.querySelector(".body-container")! as HTMLElement;
       
       divBody.scrollTo(0, divBodyContainer.offsetHeight);
+
+      this.conversation.latestMessageRead = true;
     }, 5);
 
   }
