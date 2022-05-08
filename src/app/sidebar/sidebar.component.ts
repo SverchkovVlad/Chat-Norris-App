@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   @Output() conversationClicked: EventEmitter<any> = new EventEmitter();
 
   conversations = [
-    {nickname: 'Alice Freeman', date: 'Jun 12, 2017', latestMessage: 'You are the worst!', latestMessageRead: true, 
+    {nickname: 'Alice Freeman', date: 'Jun 12, 2017', latestMessage: 'You are the worst!', latestMessageRead: false, 
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
