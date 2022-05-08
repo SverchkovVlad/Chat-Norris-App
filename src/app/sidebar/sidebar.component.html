@@ -9,7 +9,7 @@
       </div>
 
       <div class = "search-box">
-        <input type="text" placeholder = "Search or start new chat">
+        <input [(ngModel)] = "searchText" type="text" placeholder = "Search or start new chat">
       </div>
     </div>
 
@@ -19,7 +19,8 @@
 
       <div class="sidebar-content-conversations">
 
-        <div class = "user-info-container" *ngFor = 'let conversation of conversations'
+        <div class = "user-info-container" 
+          *ngFor = 'let conversation of !searchText ? conversations : filteredConversations()'
           (click) = "conversationClicked.emit(conversation)"
         >
           <div class="avatar-container">

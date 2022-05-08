@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   constructor() { }
 
   @Output() conversationClicked: EventEmitter<any> = new EventEmitter();
+  searchText: string = "";
 
   conversations = [
     {nickname: 'Alice Freeman', date: 'Jun 12, 2017', latestMessage: 'You are the worst!', latestMessageRead: false, 
@@ -69,6 +70,13 @@ export class SidebarComponent implements OnInit {
       {id: 4, body: 'And me too, pal!', time: '4/22/17, 4:00 AM', me: true},
         ]}
   ]
+
+  filteredConversations() {
+    return this.conversations.filter((conversation) => {
+      return conversation.nickname.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            conversation.latestMessage.toLowerCase().includes(this.searchText.toLowerCase());
+    })
+  }
 
   ngOnInit(): void {
   }
