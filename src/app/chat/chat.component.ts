@@ -18,19 +18,20 @@ export class ChatComponent implements OnInit, OnChanges {
     let textToSend = textArea?.value;
 
     if (textToSend) {
+
+      let currentDate = new Date();
+
       this.conversation.messages.push(
         {
           id: 1,
           body: textToSend,
-          time: '4/22/17, 4:00 AM',
+          time: currentDate,
           me: true
         }
       );
 
       textArea.value = '';
-
       this.scrollToBottom();
-     
     }
 
   }
@@ -46,6 +47,11 @@ export class ChatComponent implements OnInit, OnChanges {
       this.conversation.latestMessageRead = true;
     }, 5);
 
+  }
+
+  submitMessage(event: Event) {
+    event.preventDefault();
+    this.sendMessage();
   }
 
   ngOnInit(): void {
