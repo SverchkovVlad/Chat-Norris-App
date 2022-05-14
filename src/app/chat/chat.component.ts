@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { DbOperationsService } from '../services/db-operations.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,9 +10,34 @@ export class ChatComponent implements OnInit, OnChanges {
 
   @Input() conversation: any;
 
-  constructor() { }
+  constructor(private dbOperationsService : DbOperationsService) { }
 
-  sendMessage() {
+  getChuckNorrisAnswer() {
+
+      return this.dbOperationsService.getChuckNorrisAnswer().subscribe((answer) => {
+        console.log(answer.value);
+
+        //let conv = this.conversation;
+  
+        let currentDate = new Date();
+  
+        this.conversation.messages.push(
+          {
+            id: this.conversation.messages.length + 1,
+            body: answer.value,
+            time: currentDate,
+            me: false
+          }
+        );
+
+        this.conversation.latestMessageRead = false;
+        this.scrollToBottom();
+  
+      });
+
+  }
+
+  sendMessage(myMessage: boolean) {
 
     let textArea = document.querySelector('textarea')!;
     let textToSend = textArea?.value;
@@ -23,15 +48,18 @@ export class ChatComponent implements OnInit, OnChanges {
 
       this.conversation.messages.push(
         {
-          id: 1,
+          id: this.conversation.messages.length + 1,
           body: textToSend,
           time: currentDate,
-          me: true
+          me: myMessage
         }
       );
 
       textArea.value = '';
       this.scrollToBottom();
+      this.getChuckNorrisAnswer();
+      
+
     }
 
   }
@@ -51,7 +79,7 @@ export class ChatComponent implements OnInit, OnChanges {
 
   submitMessage(event: Event) {
     event.preventDefault();
-    this.sendMessage();
+    this.sendMessage(true);
   }
 
   ngOnInit(): void {
