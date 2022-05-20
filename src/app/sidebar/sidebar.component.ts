@@ -1,5 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,13 +9,16 @@ import { EventEmitter } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private routerActivated: ActivatedRoute) { }
 
   @Output() conversationClicked: EventEmitter<any> = new EventEmitter();
+  @Input() newMessageFromChuck: any;
+  
   searchText: string = "";
 
   conversations = [
     {nickname: 'Alice Freeman', latestMessageRead: false, 
+    id: 1,
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
@@ -28,13 +32,15 @@ export class SidebarComponent implements OnInit {
         ]},
 
     {nickname: 'Josefina', latestMessageRead: false, 
+    id: 2,
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
       {id: 1, body: 'O!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '2/17/17, 4:00 AM', me: true}
         ]},
 
-    {nickname: 'Velazquez', latestMessageRead: true, 
+    {nickname: 'Velazquez', latestMessageRead: true,
+    id: 3, 
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
@@ -44,6 +50,7 @@ export class SidebarComponent implements OnInit {
         ]},
 
     {nickname: 'Johnny Nitro', latestMessageRead: true, 
+    id: 4,
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
@@ -53,6 +60,7 @@ export class SidebarComponent implements OnInit {
         ]},
 
     {nickname: 'Jeff Hardy', latestMessageRead: true,
+    id: 5,
     avatar: '/assets/icon/no-user-img-2.png',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
@@ -62,6 +70,7 @@ export class SidebarComponent implements OnInit {
         ]},
 
     {nickname: 'Alice Freeman', latestMessageRead: false,
+    id: 6,
     avatar: '/assets/icon/no-user-img-2.png', 
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
@@ -97,6 +106,21 @@ export class SidebarComponent implements OnInit {
 
   ngDoCheck() {
     this.sortMessagesByTime();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes && this.newMessageFromChuck) {
+
+      let chuckMessage = this.newMessageFromChuck.newMessage[0];
+      //let latestMessageRead = this.newMessageFromChuck.latestMessageRead;
+
+      let receiverID = this.conversations.findIndex((receiver) => 
+        receiver.id == this.newMessageFromChuck.conversationID
+      );
+
+        this.conversations[receiverID].messages.push(chuckMessage);
+        this.conversations[receiverID].latestMessageRead = false;
+    }
   }
 
 }

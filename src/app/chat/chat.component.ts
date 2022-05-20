@@ -1,43 +1,48 @@
-import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DbOperationsService } from '../services/db-operations.service';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { isObservable, Observable } from "rxjs";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
+
+
 export class ChatComponent implements OnInit, OnChanges {
 
   @Input() conversation: any;
+  @Output() conversationEdited: EventEmitter<any> = new EventEmitter();
 
-  constructor(private dbOperationsService : DbOperationsService) { }
+  constructor(
+    private dbOperationsService: DbOperationsService,
+    private sidebarComponent: SidebarComponent) { }
+    
 
-  getChuckNorrisAnswer() {
+  getChuckNorrisAnswer(conversationID: any) {
 
-      return this.dbOperationsService.getChuckNorrisAnswer().subscribe((answer) => {
-        console.log(answer.value);
+    return this.dbOperationsService.getChuckNorrisAnswer().subscribe((answer) => {
 
-        //let conv = this.conversation;
-  
-        let currentDate = new Date();
-  
-        this.conversation.messages.push(
-          {
-            id: this.conversation.messages.length + 1,
-            body: answer.value,
-            time: currentDate,
-            me: false
-          }
-        );
+      let currentDate = new Date().toString();
 
-        this.conversation.latestMessageRead = false;
-        this.scrollToBottom();
-  
-      });
+      let newMessage = [
+        {
+          id: this.sidebarComponent.conversations[conversationID - 1].messages.length + 1,
+          body: answer.value,
+          time: currentDate,
+          me: false
+        }
+      ];
+
+      this.conversationEdited.emit( { conversationID, newMessage } );
+      this.scrollToBottom();
+
+    });
 
   }
 
-  sendMessage(myMessage: boolean) {
+  sendMessage() {
 
     let textArea = document.querySelector('textarea')!;
     let textToSend = textArea?.value;
@@ -51,14 +56,18 @@ export class ChatComponent implements OnInit, OnChanges {
           id: this.conversation.messages.length + 1,
           body: textToSend,
           time: currentDate,
-          me: myMessage
+          me: true
         }
       );
 
       textArea.value = '';
       this.scrollToBottom();
-      this.getChuckNorrisAnswer();
-      
+
+      let id = this.conversation.id;
+
+      setTimeout(() => {
+        return this.getChuckNorrisAnswer(id);
+      }, 5000);
 
     }
 
@@ -69,7 +78,7 @@ export class ChatComponent implements OnInit, OnChanges {
     setTimeout(() => {
       let divBody = document.querySelector(".body")! as HTMLElement;
       let divBodyContainer = document.querySelector(".body-container")! as HTMLElement;
-      
+
       divBody.scrollTo(0, divBodyContainer.offsetHeight);
 
       this.conversation.latestMessageRead = true;
@@ -79,15 +88,32 @@ export class ChatComponent implements OnInit, OnChanges {
 
   submitMessage(event: Event) {
     event.preventDefault();
-    this.sendMessage(true);
+    this.sendMessage();
   }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes) this.scrollToBottom();
+
+    if (changes && document.querySelector(".body")) 
+      this.scrollToBottom();
+
+    //console.log(this.router.url.split('?')[0])
+
+    //let id;
+
+    // this.routeActivated.children.forEach(child => {
+    //   child.params.subscribe(params => {
+    //       const id = +params['id-chat'];
+    //       alert(id);
+    //   })
+    // });
+
+    if (this.conversation)
+      console.log(this.conversation.id);
+
   }
 
 }

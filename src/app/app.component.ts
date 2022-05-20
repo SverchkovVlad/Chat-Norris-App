@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'chatApp';
 
+  constructor(private router: Router, private routerActivated: ActivatedRoute) { }
+
   conversation: any;
+  newMessageFromChuck: any;
 
   onConversationSelected(conversation : any) {
+
     this.conversation = conversation;
 
     let displayChatDiv : HTMLElement | null = document.querySelector('app-chat');
@@ -18,7 +23,12 @@ export class AppComponent {
     if (displayChatDiv) {
       displayChatDiv.style.display = "grid";
     }
-    
+
+    this.router.navigate(['chat', this.conversation.id], {relativeTo:this.routerActivated});
+  }
+
+  messageIncome(incomeInfo: any) {
+    this.newMessageFromChuck = incomeInfo;
   }
 
 

@@ -2,13 +2,13 @@
   
   <div class="chat-container">
 
-    <app-sidebar (conversationClicked) = "onConversationSelected($event)"></app-sidebar>
+    <app-sidebar (conversationClicked) = "onConversationSelected($event)" [newMessageFromChuck] = "newMessageFromChuck"></app-sidebar>
   
     <div class="chat-placeholder" *ngIf = "!conversation">
       <h3>Select a chat to start messaging</h3>
     </div>
   
-    <app-chat [conversation] = "conversation"  style = "display: none;"></app-chat>
+    <app-chat [conversation] = "conversation" (conversationEdited)="messageIncome($event)" style = "display: none;"></app-chat>
   
   </div>
   
@@ -16,4 +16,4 @@
 
 </div>
 
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->

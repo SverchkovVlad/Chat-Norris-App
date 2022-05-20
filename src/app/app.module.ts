@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ChatComponent } from './chat/chat.component';
@@ -12,16 +12,15 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     SidebarComponent,
-    ChatComponent
+    routingComponents
   ],
-  //schemas: [NO_ERRORS_SCHEMA],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [SidebarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
