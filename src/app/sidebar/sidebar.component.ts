@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private routerActivated: ActivatedRoute) { }
+  constructor(private http: HttpClient) { }
 
   @Output() conversationClicked: EventEmitter<any> = new EventEmitter();
   @Input() newMessageFromChuck: any;
@@ -19,7 +20,7 @@ export class SidebarComponent implements OnInit {
   conversations = [
     {nickname: 'Alice Freeman', latestMessageRead: false, 
     id: 1,
-    avatar: '/assets/icon/no-user-img-2.png',  
+    avatar: '/assets/icon/photos_human/1.jpg',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
@@ -33,7 +34,7 @@ export class SidebarComponent implements OnInit {
 
     {nickname: 'Josefina', latestMessageRead: false, 
     id: 2,
-    avatar: '/assets/icon/no-user-img-2.png',  
+    avatar: '/assets/icon/photos_human/2.jpg',  
     messages: [
       {id: 1, body: 'O!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '2/17/17, 4:00 AM', me: true}
@@ -41,7 +42,7 @@ export class SidebarComponent implements OnInit {
 
     {nickname: 'Velazquez', latestMessageRead: true,
     id: 3, 
-    avatar: '/assets/icon/no-user-img-2.png',  
+    avatar: '/assets/icon/photos_human/3.jpg',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
@@ -51,7 +52,7 @@ export class SidebarComponent implements OnInit {
 
     {nickname: 'Johnny Nitro', latestMessageRead: true, 
     id: 4,
-    avatar: '/assets/icon/no-user-img-2.png',  
+    avatar: '/assets/icon/photos_human/4.jpg',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
@@ -59,9 +60,9 @@ export class SidebarComponent implements OnInit {
       {id: 4, body: 'And me too, pal!', time: '4/22/10, 4:00 AM', me: true},
         ]},
 
-    {nickname: 'Jeff Hardy', latestMessageRead: true,
+    {nickname: 'Ezekiel Jackson', latestMessageRead: true,
     id: 5,
-    avatar: '/assets/icon/no-user-img-2.png',  
+    avatar: '/assets/icon/photos_human/6.jpg',  
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
@@ -69,9 +70,9 @@ export class SidebarComponent implements OnInit {
       {id: 4, body: 'And me too, pal!', time: '4/22/20, 4:00 AM', me: true},
         ]},
 
-    {nickname: 'Alice Freeman', latestMessageRead: false,
+    {nickname: 'Susan Reeds', latestMessageRead: false,
     id: 6,
-    avatar: '/assets/icon/no-user-img-2.png', 
+    avatar: '/assets/icon/photos_human/5.jpg', 
     messages: [
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
@@ -80,7 +81,7 @@ export class SidebarComponent implements OnInit {
         ]}
   ];
 
-  filteredConversations() {
+   filteredConversations() {
     return this.conversations.filter((conversation) => {
       return conversation.nickname.toLowerCase().includes(this.searchText.toLowerCase()) ||
             conversation.messages[conversation.messages.length - 1].body.toLowerCase().includes(this.searchText.toLowerCase());
@@ -112,7 +113,6 @@ export class SidebarComponent implements OnInit {
     if (changes && this.newMessageFromChuck) {
 
       let chuckMessage = this.newMessageFromChuck.newMessage[0];
-      //let latestMessageRead = this.newMessageFromChuck.latestMessageRead;
 
       let receiverID = this.conversations.findIndex((receiver) => 
         receiver.id == this.newMessageFromChuck.conversationID

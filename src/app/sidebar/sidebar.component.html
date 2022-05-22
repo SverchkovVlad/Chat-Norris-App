@@ -24,7 +24,7 @@
           (click) = "conversationClicked.emit(conversation)"
         >
           <div class="avatar-container">
-            <img class = "avatar-image" src="/assets/icon/no-user-img-2.png" alt="">
+            <img class = "avatar-image" [src] = "conversation.avatar" alt="">
             <img *ngIf = "conversation.latestMessageRead" class = "message-status" src="/assets/icon/check-mark-removebg-preview.png" alt="">
             <img *ngIf = "!conversation.latestMessageRead" class = "message-status" src="/assets/icon/unread-messages.png" alt="">
           </div>
