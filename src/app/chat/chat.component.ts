@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit, OnChanges {
   constructor(
     private dbOperationsService: DbOperationsService,
     private sidebarComponent: SidebarComponent) { }
-    
+
 
   getChuckNorrisAnswer(conversationID: any) {
 
@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit, OnChanges {
         }
       ];
 
-      this.conversationEdited.emit( { conversationID, newMessage } );
+      this.conversationEdited.emit({ conversationID, newMessage });
       this.scrollToBottom();
 
     });
@@ -76,8 +76,8 @@ export class ChatComponent implements OnInit, OnChanges {
   scrollToBottom() {
 
     setTimeout(() => {
-      let divBody = document.querySelector(".body")! as HTMLElement;
-      let divBodyContainer = document.querySelector(".body-container")! as HTMLElement;
+      let divBody = document.querySelector(".body") as HTMLElement;
+      let divBodyContainer = document.querySelector(".body-container") as HTMLElement;
 
       divBody.scrollTo(0, divBodyContainer.offsetHeight);
 
@@ -97,23 +97,13 @@ export class ChatComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
 
+    // I use setTimeout in order to prevent error in console - "div.body doesn`t exist"
+    // using other variants was unsuccessful for me(( 
+    setTimeout( () => {
     if (changes && document.querySelector(".body")) 
       this.scrollToBottom();
+    }, 5);
 
-    //console.log(this.router.url.split('?')[0])
-
-    //let id;
-
-    // this.routeActivated.children.forEach(child => {
-    //   child.params.subscribe(params => {
-    //       const id = +params['id-chat'];
-    //       alert(id);
-    //   })
-    // });
-
-    if (this.conversation)
-      console.log(this.conversation.id);
+    }
 
   }
-
-}

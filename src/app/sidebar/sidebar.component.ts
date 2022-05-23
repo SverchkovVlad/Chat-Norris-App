@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +9,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    //if (localStorage.getItem('session')) {
+      this.conversations = JSON.parse(localStorage.getItem('session') || '{}');
+    //}
+   }
 
   @Output() conversationClicked: EventEmitter<any> = new EventEmitter();
   @Input() newMessageFromChuck: any;
@@ -26,10 +29,10 @@ export class SidebarComponent implements OnInit {
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
       {id: 3, body: 'I am fine, thank you! What about you?', time: '4/22/17, 4:00 AM', me: false},
       {id: 4, body: 'And me too, pal!', time: '4/22/17, 4:00 AM', me: true},
-      {id: 5, body: 'Sounds great! So, is our plan of meeting is still in power? Don`t you mind me to invite my GF?', time: '4/22/17, 4:00 AM', me: true},
-      {id: 6, body: 'I am fine, thank you! What about you?', time: '4/22/17, 4:00 AM', me: false},
-      {id: 7, body: 'And me too, pal!', time: '4/22/17, 4:00 AM', me: true},
-      {id: 8, body: 'Sounds great! So, is our plan of meeting is still in power? Don`t you mind me to invite my GF? I am the best wrestler, i am the best talker. I am the best in the world, at what I do! (@ CM PUNK)', time: '4/22/17, 4:00 AM', me: true}
+      {id: 5, body: 'Sounds great! So, is our plan of meeting is still in power? Don`t you mind me to invite my brother?', time: '4/22/17, 4:00 AM', me: true},
+      {id: 6, body: 'Ok) You may take him!', time: '4/22/17, 4:00 AM', me: false},
+      {id: 7, body: 'Great! Thnx', time: '4/22/17, 4:00 AM', me: true},
+      {id: 8, body: 'Now let`s add here some Lorem ipsum dolor text for best quality content... Now let`s add here some Lorem ipsum dolor text for best quality content...', time: '4/22/17, 4:00 AM', me: true}
         ]},
 
     {nickname: 'Josefina', latestMessageRead: false, 
@@ -101,15 +104,24 @@ export class SidebarComponent implements OnInit {
 
   }
 
+  playAudio_NewMessage(){
+    let audio = new Audio();
+    audio.src = "/assets/sound/msg.mp3";
+    audio.load();
+    audio.play();
+  }
+
   ngOnInit(): void {
-    this.sortMessagesByTime();
+    this.sortMessagesByTime();    
   }
 
   ngDoCheck() {
     this.sortMessagesByTime();
+    localStorage.setItem('session', JSON.stringify(this.conversations));
   }
 
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes && this.newMessageFromChuck) {
 
       let chuckMessage = this.newMessageFromChuck.newMessage[0];
@@ -120,7 +132,11 @@ export class SidebarComponent implements OnInit {
 
         this.conversations[receiverID].messages.push(chuckMessage);
         this.conversations[receiverID].latestMessageRead = false;
+
+        this.playAudio_NewMessage(); 
+
     }
+
   }
 
 }
