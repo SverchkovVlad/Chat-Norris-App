@@ -2,7 +2,7 @@
 
     <div class = "sidebar-header">
       <div class = "user-info-container">
-        <div class="avatar-container">
+        <div class="avatar">
           <img class = "avatar-image" src="/assets/icon/no-user-img-2.png">
           <img class = "message-status" src="../../assets/icon/check-mark-removebg-preview.png" alt="">
         </div>     
@@ -23,7 +23,7 @@
           *ngFor = 'let conversation of !searchText ? conversations : filteredConversations()'
           (click) = "conversationClicked.emit(conversation)"
         >
-          <div class="avatar-container">
+          <div class="avatar">
             <img class = "avatar-image" [src] = "conversation.avatar" alt="">
             <img *ngIf = "conversation.latestMessageRead" class = "message-status" src="/assets/icon/check-mark-removebg-preview.png" alt="">
             <img *ngIf = "!conversation.latestMessageRead" class = "message-status" src="/assets/icon/unread-messages.png" alt="">
