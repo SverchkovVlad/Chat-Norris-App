@@ -1,9 +1,11 @@
+$footer-height: 24px;
+
 .main-wrapper {
 
-    //height: 100vh;
+    height: 100vh;
     display: grid;
-    grid-template-rows: 97vh 18px;
-    //grid-template-rows: auto 18px;
+    grid-template-rows: 1fr $footer-height;
+ 
 
     .chat-container {
         
@@ -12,16 +14,11 @@
     
         app-sidebar {
             
-            display: grid;
-            //height: 97vh;
-            grid-template-rows: repeat(5, 20%);
-            
         }
     
         app-chat {
             background-color: #fafafa;
-            //display: flex;
-            //height: 100%;
+            display: grid;
         }
     
     
@@ -46,10 +43,8 @@
     }
     
     footer {
-        min-height: 18px;
         border-top: 2px solid #cccccc;
         background-color: #f5f5f5;
-        width: 100%;
         z-index: 1;
     }
 }

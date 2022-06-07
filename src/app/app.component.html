@@ -8,7 +8,9 @@
       <h3>Select a chat to start messaging</h3>
     </div>
   
-    <app-chat [conversation] = "conversation" (conversationEdited)="messageIncome($event)" style = "display: none;"></app-chat>
+    <app-chat *ngIf = "conversation" [conversation] = "conversation" (conversationEdited)="messageIncome($event)"></app-chat>
+
+    <!-- <app-chat *ngIf = "conversation" [conversation] = "conversation" (conversationEdited)="messageIncome($event)"></app-chat> -->
   
   </div>
   

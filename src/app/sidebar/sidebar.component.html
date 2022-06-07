@@ -1,42 +1,46 @@
-<nav class = "sidebar">
+<nav class="sidebar">
 
-    <div class = "sidebar-header">
-      <div class = "user-info-container">
+  <div class="sidebar-header">
+    <div class="user-info-container">
+      <div class="avatar">
+        <img class="avatar-image" src="/assets/icon/no-user-img-2.png">
+        <img class="message-status" src="../../assets/icon/check-mark-removebg-preview.png" alt="">
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input [(ngModel)]="searchText" type="text" placeholder="Search or start new chat">
+    </div>
+  </div>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-content-header">
+      Chats
+    </div>
+
+    <div class="sidebar-content-conversations">
+
+      <div class="user-info-container"
+        *ngFor='let conversation of !searchText ? conversations : filteredConversations()'
+        (click)="conversationClicked.emit(conversation)">
         <div class="avatar">
-          <img class = "avatar-image" src="/assets/icon/no-user-img-2.png">
-          <img class = "message-status" src="../../assets/icon/check-mark-removebg-preview.png" alt="">
-        </div>     
-      </div>
-
-      <div class = "search-box">
-        <input [(ngModel)] = "searchText" type="text" placeholder = "Search or start new chat">
-      </div>
-    </div>
-
-    <div class="sidebar-content">
-
-      <div class = "sidebar-content-header">Chats</div>
-
-      <div class="sidebar-content-conversations">
-
-        <div class = "user-info-container" 
-          *ngFor = 'let conversation of !searchText ? conversations : filteredConversations()'
-          (click) = "conversationClicked.emit(conversation)"
-        >
-          <div class="avatar">
-            <img class = "avatar-image" [src] = "conversation.avatar" alt="">
-            <img *ngIf = "conversation.latestMessageRead" class = "message-status" src="/assets/icon/check-mark-removebg-preview.png" alt="">
-            <img *ngIf = "!conversation.latestMessageRead" class = "message-status" src="/assets/icon/unread-messages.png" alt="">
-          </div>
-          <div class="conversation-content">
-            <div class="nickname">{{conversation.nickname}}</div>
-            <div class = "date">{{conversation.messages[conversation.messages.length - 1].time | date: 'mediumDate'}}</div>
-            <div class="message">{{conversation.messages[conversation.messages.length - 1].body}}</div>
-          </div>
+          <img class="avatar-image" [src]="conversation.avatar" alt="">
+          <img *ngIf="conversation.latestMessageRead" class="message-status"
+            src="/assets/icon/check-mark-removebg-preview.png" alt="">
+          <img *ngIf="!conversation.latestMessageRead" class="message-status" src="/assets/icon/unread-messages.png"
+            alt="">
         </div>
-        
+        <div class="conversation-content">
+          <div class="nickname">{{conversation.nickname}}</div>
+          <div class="date">{{conversation.messages[conversation.messages.length - 1].time | date: 'mediumDate'}}</div>
+          <div class="message">{{conversation.messages[conversation.messages.length - 1].body}}</div>
+        </div>
       </div>
 
     </div>
+
+
+  </div>
 
 </nav>

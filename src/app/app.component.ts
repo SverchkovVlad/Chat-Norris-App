@@ -18,11 +18,7 @@ export class AppComponent {
 
     this.conversation = conversation;
 
-    let displayChatDiv : HTMLElement | null = document.querySelector('app-chat');
-
-    if (displayChatDiv) {
-      displayChatDiv.style.display = "grid";
-    }
+    
 
     this.router.navigate(['chat', this.conversation.id], {relativeTo:this.routerActivated});
   }
