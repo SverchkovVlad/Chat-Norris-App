@@ -10,9 +10,11 @@ import { EventEmitter } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   constructor(private http: HttpClient) {
-    //if (localStorage.getItem('session')) {
+
+    if (localStorage.getItem('session')) {
       this.conversations = JSON.parse(localStorage.getItem('session') || '{}');
-    //}
+    }
+    
    }
 
   @Output() conversationClicked: EventEmitter<any> = new EventEmitter();
