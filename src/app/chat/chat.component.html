@@ -10,6 +10,11 @@
             <div class="nickname">
                 {{conversation.nickname}}
             </div>
+
+            <div *ngIf = "mobileVersion" class = "return-btn">
+                <img (click) = "returnToSidebar()" src="../../assets/icon/return_arrow.png">
+            </div>
+
         </div>
     </div>
     <div class="body">

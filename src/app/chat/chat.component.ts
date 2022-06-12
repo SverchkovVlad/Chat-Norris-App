@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DbOperationsService } from '../services/db-operations.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { isObservable, Observable } from "rxjs";
@@ -14,7 +14,9 @@ export class ChatComponent implements OnInit, OnChanges {
 
   @Input() conversation: any;
   @Output() conversationEdited: EventEmitter<any> = new EventEmitter();
-
+  @Output() closeChatWindow: EventEmitter<any> = new EventEmitter();
+  mobileVersion: boolean = false;
+  
   constructor(
     private dbOperationsService: DbOperationsService,
     private sidebarComponent: SidebarComponent) { }
@@ -44,8 +46,8 @@ export class ChatComponent implements OnInit, OnChanges {
 
   sendMessage() {
 
-    let textArea = document.querySelector('textarea')!;
-    let textToSend = textArea?.value;
+    let textArea = document.querySelector('textarea') as HTMLTextAreaElement;
+    let textToSend = textArea.value;
 
     if (textToSend) {
 
@@ -91,6 +93,15 @@ export class ChatComponent implements OnInit, OnChanges {
     this.sendMessage();
   }
 
+  returnToSidebar() {
+    this.closeChatWindow.emit(true);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    event.target.innerWidth <= 768 ? this.mobileVersion = true : this.mobileVersion = false;
+  }
+
   ngOnInit(): void {
 
   }
@@ -99,11 +110,14 @@ export class ChatComponent implements OnInit, OnChanges {
 
     // I use setTimeout in order to prevent error in console - "div.body doesn`t exist"
     // using other variants was unsuccessful for me(( 
+      
     setTimeout( () => {
     if (changes && document.querySelector(".body")) 
       this.scrollToBottom();
     }, 5);
 
+    if (window.innerWidth <= 768)
+      this.mobileVersion = true;
     }
 
   }

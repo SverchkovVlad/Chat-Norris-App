@@ -41,7 +41,7 @@ export class SidebarComponent implements OnInit {
     id: 2,
     avatar: '/assets/icon/photos_human/2.jpg',  
     messages: [
-      {id: 1, body: 'O!', time: '4/22/17, 4:00 AM', me: false},
+      {id: 1, body: 'Ping', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '2/17/17, 4:00 AM', me: true}
         ]},
 
@@ -49,10 +49,10 @@ export class SidebarComponent implements OnInit {
     id: 3, 
     avatar: '/assets/icon/photos_human/3.jpg',  
     messages: [
-      {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
+      {id: 1, body: 'Holla, amigo!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
       {id: 3, body: 'I am fine, thank you! What about you?', time: '4/22/17, 4:00 AM', me: false},
-      {id: 4, body: 'And me too, pal!', time: '4/22/18, 4:00 AM', me: true},
+      {id: 4, body: 'I am going to meet my bro tomorrow. Don`t you mind I take your car?', time: '4/22/18, 4:00 AM', me: true},
         ]},
 
     {nickname: 'Johnny Nitro', latestMessageRead: true, 
@@ -62,7 +62,7 @@ export class SidebarComponent implements OnInit {
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
       {id: 3, body: 'I am fine, thank you! What about you?', time: '4/22/17, 4:00 AM', me: false},
-      {id: 4, body: 'And me too, pal!', time: '4/22/10, 4:00 AM', me: true},
+      {id: 4, body: 'Sounds great! Let me think about our wknds?', time: '4/22/10, 4:00 AM', me: true},
         ]},
 
     {nickname: 'Ezekiel Jackson', latestMessageRead: true,
@@ -72,7 +72,7 @@ export class SidebarComponent implements OnInit {
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
       {id: 3, body: 'I am fine, thank you! What about you?', time: '4/22/17, 4:00 AM', me: false},
-      {id: 4, body: 'And me too, pal!', time: '4/22/20, 4:00 AM', me: true},
+      {id: 4, body: 'Lorem ipsum dolor!', time: '4/22/20, 4:00 AM', me: true},
         ]},
 
     {nickname: 'Susan Reeds', latestMessageRead: false,
@@ -82,7 +82,7 @@ export class SidebarComponent implements OnInit {
       {id: 1, body: 'Oh, hello!', time: '4/22/17, 4:00 AM', me: false},
       {id: 2, body: 'Hi there! How are you?', time: '4/22/17, 4:00 AM', me: true},
       {id: 3, body: 'I am fine, thank you! What about you?', time: '4/22/17, 4:00 AM', me: false},
-      {id: 4, body: 'And me too, pal!', time: '4/22/15, 4:00 AM', me: true},
+      {id: 4, body: 'Lorem ipsum dolor!', time: '4/22/15, 4:00 AM', me: true},
         ]}
   ];
 

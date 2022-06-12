@@ -135,7 +135,6 @@ $header-height: 152px;
                         padding-right: 18px;
                         display: grid;
                         line-height: 25px;
-
                     }
 
                     .message {
@@ -238,3 +237,25 @@ $header-height: 152px;
     }
 
 }
+
+@media all and (max-width: 768px) {
+    .sidebar {
+        .sidebar-header {
+            .user-info-container {
+                grid-template-columns: 100%;
+                justify-self: center;
+
+                .avatar {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        .sidebar-content {
+            .sidebar-content-header {
+                text-align: center;
+                border-bottom: 1px solid #6eb2e1;
+            }
+        }
+    }
+ }

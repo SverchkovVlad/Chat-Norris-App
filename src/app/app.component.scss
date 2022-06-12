@@ -5,29 +5,28 @@ $footer-height: 24px;
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr $footer-height;
- 
 
     .chat-container {
-        
+
         display: grid;
         grid-template-columns: 36% 64%;
-    
+
         // app-sidebar {
-            
+
         // }
-    
+
         app-chat {
             background-color: #fafafa;
             display: grid;
         }
-    
-    
+
+
         .chat-placeholder {
-    
+
             display: flex;
             align-items: center;
             justify-content: center;
-    
+
             h3 {
                 color: white;
                 font-family: Arial, Helvetica, sans-serif;
@@ -39,9 +38,9 @@ $footer-height: 24px;
                 text-align: center;
             }
         }
-       
+
     }
-    
+
     footer {
         border-top: 2px solid #cccccc;
         background-color: #f5f5f5;
@@ -49,6 +48,32 @@ $footer-height: 24px;
     }
 }
 
-@media all and (max-width: 1220px) { 
-    
+@media all and (max-width: 1900px) {
+
+    .main-wrapper {
+
+        .chat-container {
+
+            app-sidebar {
+                display: block;
+            }
+            
+        }
+    }
+}
+
+@media all and (max-width: 768px) {
+
+    .main-wrapper {
+
+        .chat-container {
+
+            grid-template-columns: 100%;
+
+            .chat-placeholder {
+                display: none;
+            }
+
+        }
+    }
 }
