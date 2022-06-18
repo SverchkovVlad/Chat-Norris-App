@@ -11,8 +11,8 @@
     <app-chat 
       *ngIf = "conversation" 
       [conversation] = "conversation" 
-      (conversationEdited)="messageIncome($event)"
-      (closeChatWindow)="returnToSidebarCommand()">
+      (chuckResponse)="messageIncome($event)"
+      (closeChatWindow_Flag)="returnToSidebarCommand()">
     </app-chat>
 
     <!-- <app-chat *ngIf = "conversation" [conversation] = "conversation" (conversationEdited)="messageIncome($event)"></app-chat> -->

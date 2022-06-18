@@ -1,5 +1,5 @@
 import { Component, HostListener, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Conversation, IncomingMessage } from './interfaces/message';
 
 @Component({
   selector: 'app-root',
@@ -12,23 +12,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AppComponent {
   title = 'chatApp';
 
-  constructor(private router: Router, private routerActivated: ActivatedRoute) { }
+  constructor() { }
 
-  conversation: any;
+  conversation: Conversation | undefined;
   conversationClicked: boolean = false;
-  newMessageFromChuck: any;
+  newMessageFromChuck: IncomingMessage | undefined;
 
-  onConversationSelected(conversation: any) {
+  onConversationSelected(conversation: Conversation) {
 
     this.conversation = conversation;
     this.conversationClicked = true;
     this.openChat_ForMobile();
-
-    //this.router.navigate(['chat', this.conversation.id], { relativeTo: this.routerActivated });
     
   }
 
-  messageIncome(incomeInfo: any) {
+  messageIncome(incomeInfo: IncomingMessage) {
     this.newMessageFromChuck = incomeInfo;
   }
 

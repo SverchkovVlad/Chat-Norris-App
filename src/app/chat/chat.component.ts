@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Conversation, IncomingMessage, Message } from '../interfaces/message';
 import { DbOperationsService } from '../services/db-operations.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { isObservable, Observable } from "rxjs";
 
 @Component({
   selector: 'app-chat',
@@ -12,9 +12,9 @@ import { isObservable, Observable } from "rxjs";
 
 export class ChatComponent implements OnInit, OnChanges {
 
-  @Input() conversation: any;
-  @Output() conversationEdited: EventEmitter<any> = new EventEmitter();
-  @Output() closeChatWindow: EventEmitter<any> = new EventEmitter();
+  @Input() conversation: Conversation | undefined;
+  @Output() chuckResponse: EventEmitter<IncomingMessage> = new EventEmitter();
+  @Output() closeChatWindow_Flag: EventEmitter<boolean> = new EventEmitter();
   mobileVersion: boolean = false;
   
   constructor(
@@ -22,22 +22,23 @@ export class ChatComponent implements OnInit, OnChanges {
     private sidebarComponent: SidebarComponent) { }
 
 
-  getChuckNorrisAnswer(conversationID: any) {
+  getChuckNorrisAnswer(conversationID: number) {
 
     return this.dbOperationsService.getChuckNorrisAnswer().subscribe((answer) => {
 
-      let currentDate = new Date().toString();
+      let currentDate = new Date();
 
-      let newMessage = [
+      console.log(currentDate);
+
+      let incomingMessage = 
         {
-          id: this.sidebarComponent.conversations[conversationID - 1].messages.length + 1,
-          body: answer.value,
+          messageID: this.sidebarComponent.conversations[conversationID - 1].messages.length + 1,
+          text: answer.value,
           time: currentDate,
           me: false
-        }
-      ];
+        };
 
-      this.conversationEdited.emit({ conversationID, newMessage });
+      this.chuckResponse.emit({conversationID, incomingMessage});
       this.scrollToBottom();
 
     });
@@ -53,22 +54,26 @@ export class ChatComponent implements OnInit, OnChanges {
 
       let currentDate = new Date();
 
-      this.conversation.messages.push(
-        {
-          id: this.conversation.messages.length + 1,
-          body: textToSend,
-          time: currentDate,
-          me: true
-        }
-      );
+      if (this.conversation) {
+        this.conversation.messages.push(
+          {
+            messageID: this.conversation.messages.length + 1,
+            text: textToSend,
+            time: currentDate,
+            me: true
+          }
+        );
+  
+      }
 
       textArea.value = '';
       this.scrollToBottom();
 
-      let id = this.conversation.id;
+      let id = this.conversation?.conversationID;
 
       setTimeout(() => {
-        return this.getChuckNorrisAnswer(id);
+        if (id) return this.getChuckNorrisAnswer(id)
+        else return console.log('error')
       }, 5000);
 
     }
@@ -83,7 +88,7 @@ export class ChatComponent implements OnInit, OnChanges {
 
       divBody.scrollTo(0, divBodyContainer.offsetHeight);
 
-      this.conversation.latestMessageRead = true;
+      if (this.conversation) this.conversation.latestMessageRead = true;
     }, 5);
 
   }
@@ -94,7 +99,7 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   returnToSidebar() {
-    this.closeChatWindow.emit(true);
+    this.closeChatWindow_Flag.emit(true);
   }
 
   @HostListener('window:resize', ['$event'])

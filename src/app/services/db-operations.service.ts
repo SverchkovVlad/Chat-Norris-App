@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ChuckAnswer } from '../interfaces/chuck_answer';
+import { ChuckAnswerAPI_Response } from '../interfaces/chuck_answer';
 import { catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class DbOperationsService {
   constructor(private http: HttpClient) { }
 
   getChuckNorrisAnswer() {
-    return this.http.get<ChuckAnswer>('https://api.chucknorris.io/jokes/random').pipe(
+    return this.http.get<ChuckAnswerAPI_Response>('https://api.chucknorris.io/jokes/random').pipe(
       catchError(this.handleError)
     );
   }
