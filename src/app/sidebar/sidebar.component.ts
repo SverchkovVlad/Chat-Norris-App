@@ -123,6 +123,24 @@ export class SidebarComponent implements OnInit {
     audio.play();
   }
 
+  acceptAndDisplayIncomeMessage(newMessageFromChuck: IncomingMessage) {
+
+    let incomeMessage =
+      {
+        messageID: newMessageFromChuck.incomingMessage.messageID,
+        text: newMessageFromChuck.incomingMessage.text,
+        time: (newMessageFromChuck.incomingMessage.time).toString(),
+        me: false
+      };
+
+      let receiverID = this.conversations.findIndex((receiver) =>
+        receiver.conversationID == newMessageFromChuck.conversationID
+      );
+
+      this.conversations[receiverID].messages.push(incomeMessage);
+      this.conversations[receiverID].latestMessageRead = false;
+  }
+
   ngOnInit(): void {
     this.sortMessagesByTime();
   }
@@ -136,23 +154,7 @@ export class SidebarComponent implements OnInit {
 
     if (changes && this.newMessageFromChuck) {
 
-      let incomeMessage =
-      {
-        messageID: this.newMessageFromChuck.incomingMessage.messageID,
-        text: this.newMessageFromChuck.incomingMessage.text,
-        time: (this.newMessageFromChuck.incomingMessage.time).toString(),
-        me: false
-      };
-
-      let receiverID = this.conversations.findIndex((receiver) =>
-        receiver.conversationID == this.newMessageFromChuck?.conversationID
-      );
-
-      console.log(receiverID);
-
-      this.conversations[receiverID].messages.push(incomeMessage);
-      this.conversations[receiverID].latestMessageRead = false;
-
+      this.acceptAndDisplayIncomeMessage(this.newMessageFromChuck);
       this.playAudio_NewMessage();
 
     }

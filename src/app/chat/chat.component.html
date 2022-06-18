@@ -1,6 +1,6 @@
 <div class="chat-container" *ngIf = "conversation">
     <div class="header">
-        <div class="header-container">
+        <div class="header-content">
             <div class="avatar">
                 <img [src] ="conversation.avatar">
                 <img *ngIf = "conversation.latestMessageRead" class = "message-status" src="../../assets/icon/check-mark-removebg-preview.png">
@@ -19,7 +19,7 @@
     </div>
     <div class="body">
 
-        <div class="body-container" #chatWindow>
+        <div class="body-content" #chatWindow>
 
             <div *ngFor = "let message of conversation.messages" [ngClass]="message.me ? 'my-message' : 'message-box' ">
 

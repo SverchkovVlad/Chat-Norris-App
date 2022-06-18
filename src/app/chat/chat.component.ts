@@ -28,8 +28,6 @@ export class ChatComponent implements OnInit, OnChanges {
 
       let currentDate = new Date();
 
-      console.log(currentDate);
-
       let incomingMessage = 
         {
           messageID: this.sidebarComponent.conversations[conversationID - 1].messages.length + 1,
@@ -72,8 +70,11 @@ export class ChatComponent implements OnInit, OnChanges {
       let id = this.conversation?.conversationID;
 
       setTimeout(() => {
-        if (id) return this.getChuckNorrisAnswer(id)
-        else return console.log('error')
+        //if (id) return this.getChuckNorrisAnswer(id)
+        //else return console.log('error')
+
+        id ? this.getChuckNorrisAnswer(id) : console.log('error while getting Chuck`s answer')
+
       }, 5000);
 
     }
@@ -84,9 +85,9 @@ export class ChatComponent implements OnInit, OnChanges {
 
     setTimeout(() => {
       let divBody = document.querySelector(".body") as HTMLElement;
-      let divBodyContainer = document.querySelector(".body-container") as HTMLElement;
+      let divBodyContent = document.querySelector(".body-content") as HTMLElement;
 
-      divBody.scrollTo(0, divBodyContainer.offsetHeight);
+      divBody.scrollTo(0, divBodyContent.offsetHeight);
 
       if (this.conversation) this.conversation.latestMessageRead = true;
     }, 5);
@@ -113,7 +114,7 @@ export class ChatComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    // I use setTimeout in order to prevent error in console - "div.body doesn`t exist"
+    // I used setTimeout in order to prevent error in console - "div.body doesn`t exist"
     // using other variants was unsuccessful for me(( 
       
     setTimeout( () => {
