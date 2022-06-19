@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit, OnChanges {
     private sidebarComponent: SidebarComponent) { }
 
 
-  getChuckNorrisAnswer(conversationID: number) {
+  getChuckNorrisAnswer(specificConversation: Conversation) {
 
     return this.dbOperationsService.getChuckNorrisAnswer().subscribe((answer) => {
 
@@ -30,11 +30,14 @@ export class ChatComponent implements OnInit, OnChanges {
 
       let incomingMessage = 
         {
-          messageID: this.sidebarComponent.conversations[conversationID - 1].messages.length + 1,
+          messageID: specificConversation.messages.length + 1,
           text: answer.value,
           time: currentDate,
           me: false
         };
+
+        let conversationID : number = specificConversation.conversationID;
+
 
       this.chuckResponse.emit({conversationID, incomingMessage});
       this.scrollToBottom();
@@ -67,13 +70,13 @@ export class ChatComponent implements OnInit, OnChanges {
       textArea.value = '';
       this.scrollToBottom();
 
-      let id = this.conversation?.conversationID;
+      let specificConversation = this.conversation;
 
       setTimeout(() => {
-        //if (id) return this.getChuckNorrisAnswer(id)
+        //if (specificConversation) return this.getChuckNorrisAnswer(specificConversation)
         //else return console.log('error')
 
-        id ? this.getChuckNorrisAnswer(id) : console.log('error while getting Chuck`s answer')
+        specificConversation ? this.getChuckNorrisAnswer(specificConversation) : console.log('error while getting Chuck`s answer')
 
       }, 5000);
 
