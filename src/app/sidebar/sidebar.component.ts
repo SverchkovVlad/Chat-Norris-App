@@ -97,10 +97,28 @@ export class SidebarComponent implements OnInit {
   ];
 
   filteredConversations() {
+
+    const checkNickname = (conversation: Conversation) => {
+      return conversation.nickname.toLowerCase().includes(this.searchText.toLowerCase())
+    }
+
+    const checkMessage = (conversation: Conversation) => {
+
+      let hasSubstring : boolean = false;
+
+      for(let message of conversation.messages) {
+        if(message.text.toLowerCase().includes(this.searchText.toLowerCase())) {
+          hasSubstring = true;
+          break;
+        }
+      }
+      return hasSubstring;
+    }
+
     return this.conversations.filter((conversation) => {
-      return conversation.nickname.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        conversation.messages[conversation.messages.length - 1].text.toLowerCase().includes(this.searchText.toLowerCase());
-    })
+      return checkMessage(conversation) || checkNickname(conversation)
+    });
+      
   }
 
   sortMessagesByTime() {

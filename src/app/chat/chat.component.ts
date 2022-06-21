@@ -1,7 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Conversation, IncomingMessage, Message } from '../interfaces/message';
 import { DbOperationsService } from '../services/db-operations.service';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-chat',
@@ -18,8 +17,7 @@ export class ChatComponent implements OnInit, OnChanges {
   mobileVersion: boolean = false;
   
   constructor(
-    private dbOperationsService: DbOperationsService,
-    private sidebarComponent: SidebarComponent) { }
+    private dbOperationsService: DbOperationsService) { }
 
 
   getChuckNorrisAnswer(specificConversation: Conversation) {

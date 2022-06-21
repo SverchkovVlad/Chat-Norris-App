@@ -1,6 +1,39 @@
-# ChatApp
+# Chat-Norris-App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+
+The current project represents simple chat with capabilities to send messages and filter conversations by typed words. Created using HTML, SCSS, TypeScript, Angular. 
+
+Initial layout: 
+
+![chatapp](https://user-images.githubusercontent.com/95547642/174499330-f2890a8e-8b13-4501-929e-abf0913c3404.jpg)
+
+## Description
+
+The project has next features:
+
+- responsive design (up to 320px width);
+- perfomance were tested in Mozilla Firefox, Google Chrome, Microsoft Edge;
+- write messages to selected interlocutor; 
+- receive automatic responses from interlocutors (represented as ChuckNorris API) after 5 seconds;
+- response is accompanied by an audible signal;
+- search among contacts;
+- contacts automatically sort by time;
+- data is stored in localStorage;
+
+## Additional information
+
+The project was originally developed in Visual Studio Code for Mozilla Firefox on PC with screen resolution 1440x900.
+
+## Running project
+
+1. Download project as .zip file and unpack it.
+2. Separately install node_modules to ' Chat-Norris-App-main' folder.
+3. Open new terminal in VS Code and run ```npm start```.
+
+## Demonstartion
+
+
 
 ## Development server
 
